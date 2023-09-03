@@ -1,5 +1,5 @@
 # Note-Taker
-Application for note taking.
+Application for note taking. It can write and save notes. Using Express.js backend, it will save and retreive note data from a JSON file. 
 
 
 ## User Story
