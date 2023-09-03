@@ -8,7 +8,8 @@ const id1 = generateUniqueId();
 // GET /api/notes to read the db.json file 
 // and return all saved notes as JSON
 express.get("/notes",(req, res)=>{
-    res.json(db)
+    db = JSON.parse(fs.readFileSync(".db/db.json")) || []
+    res.json(db);
   });
 
 // POST /api/notes to receive a new note to save on request body.
@@ -22,9 +23,11 @@ express.post("/notes",(req, res) => {
         id: id1,
     }
     db.push(newNote);
-    fs.writeFileSync("./db/db.json", JSON.stringify(db));
+    fs.writeFileSync("./db/db.json", JSON.stringify(db),function(err){
+        if(err) throw err 
+    })
     res.json(db)
-})
+});
 
 
 module.exports=express 
